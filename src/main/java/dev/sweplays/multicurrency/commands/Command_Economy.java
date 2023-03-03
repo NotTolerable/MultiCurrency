@@ -112,13 +112,7 @@ public class Command_Economy extends BaseCommand {
             double finalAmount = account.getBalance(currency) + Double.parseDouble(args[2]);
 
             account.updateBalance(currency, finalAmount, true);
-            player.sendMessage(Utils.colorize(Messages.ADD_SUCCESS_NO_TARGET.get(Double.parseDouble(args[2]))
-                    .replace("{prefix}", Messages.PREFIX.get())
-                    .replace("{symbol}", currency.getSymbol())
-                    .replace("{currency}", Double.parseDouble(args[2]) <= 1 ? currency.getSingular() : currency.getPlural())
-                    .replace("{amount}", String.valueOf(Double.parseDouble(args[2])))
-                    .replace("{player}", player.getName())
-            ));
+
 
         } else if (args.length == 4 && args[0].equalsIgnoreCase("add") && player.hasPermission("multicurrency.command.economy.remove")) {
             Player target = Bukkit.getPlayer(args[1]);
@@ -143,28 +137,6 @@ public class Command_Economy extends BaseCommand {
                 return;
             }
 
-            Account targetAccount = MultiCurrency.getAccountManager().getAccount(target.getUniqueId());
-
-            double finalAmount = targetAccount.getBalance(currency) + Double.parseDouble(args[3]);
-
-            targetAccount.updateBalance(currency, finalAmount, true);
-            player.sendMessage(Utils.colorize(Messages.ADD_SUCCESS.get(Double.parseDouble(args[3]))
-                    .replace("{prefix}", Messages.PREFIX.get())
-                    .replace("{symbol}", currency.getSymbol())
-                    .replace("{currency}", Double.parseDouble(args[3]) <= 1 ? currency.getSingular() : currency.getPlural())
-                    .replace("{target}", target.getName())
-                    .replace("{amount}", String.valueOf(Double.parseDouble(args[3])))
-                    .replace("{player}", player.getName())
-            ));
-            target.sendMessage(Utils.colorize(Messages.ADD_SUCCESS_TARGET.get(Double.parseDouble(args[3]))
-                    .replace("{prefix}", Messages.PREFIX.get())
-                    .replace("{symbol}", currency.getSymbol())
-                    .replace("{currency}", Double.parseDouble(args[3]) <= 1 ? currency.getSingular() : currency.getPlural())
-                    .replace("{target}", target.getName())
-                    .replace("{amount}", String.valueOf(Double.parseDouble(args[3])))
-                    .replace("{player}", player.getName())
-            ));
-
         } else if (args.length == 3 && args[0].equalsIgnoreCase("remove") && player.hasPermission("multicurrency.command.economy.remove")) {
             Currency currency = MultiCurrency.getCurrencyManager().getCurrency(args[1]);
             if (currency == null) {
@@ -181,18 +153,6 @@ public class Command_Economy extends BaseCommand {
                 return;
             }
 
-            Account account = MultiCurrency.getAccountManager().getAccount(player.getUniqueId());
-
-            double finalAmount = account.getBalance(currency) - Double.parseDouble(args[2]);
-
-            account.updateBalance(currency, finalAmount, true);
-            player.sendMessage(Utils.colorize(Messages.REMOVE_SUCCESS_NO_TARGET.get(Double.parseDouble(args[2]))
-                    .replace("{prefix}", Messages.PREFIX.get())
-                    .replace("{symbol}", currency.getSymbol())
-                    .replace("{currency}", Double.parseDouble(args[2]) <= 1 ? currency.getSingular() : currency.getPlural())
-                    .replace("{amount}", String.valueOf(Double.parseDouble(args[2])))
-                    .replace("{player}", player.getName())
-            ));
         } else if (args.length == 4 && args[0].equalsIgnoreCase("remove") && player.hasPermission("multicurrency.command.economy.remove")) {
             Player target = Bukkit.getPlayer(args[1]);
             if (target == null) {
@@ -216,29 +176,9 @@ public class Command_Economy extends BaseCommand {
                 return;
             }
 
-            Account targetAccount = MultiCurrency.getAccountManager().getAccount(target.getUniqueId());
-
-            double finalAmount = targetAccount.getBalance(currency) - Double.parseDouble(args[3]);
-
-            targetAccount.updateBalance(currency, finalAmount, true);
-            player.sendMessage(Utils.colorize(Messages.REMOVE_SUCCESS.get(Double.parseDouble(args[3]))
-                    .replace("{prefix}", Messages.PREFIX.get())
-                    .replace("{symbol}", currency.getSymbol())
-                    .replace("{currency}", Double.parseDouble(args[3]) <= 1 ? currency.getSingular() : currency.getPlural())
-                    .replace("{target}", target.getName())
-                    .replace("{amount}", String.valueOf(Double.parseDouble(args[3])))
-                    .replace("{player}", player.getName())
-            ));
-            target.sendMessage(Utils.colorize(Messages.REMOVE_SUCCESS_TARGET.get(Double.parseDouble(args[3]))
-                    .replace("{prefix}", Messages.PREFIX.get())
-                    .replace("{symbol}", currency.getSymbol())
-                    .replace("{currency}", Double.parseDouble(args[3]) <= 1 ? currency.getSingular() : currency.getPlural())
-                    .replace("{target}", target.getName())
-                    .replace("{amount}", String.valueOf(Double.parseDouble(args[3])))
-                    .replace("{player}", player.getName())
-            ));
         } else if (!(player.hasPermission("multicurrency.command.economy.remove") || player.hasPermission("multicurrency.command.economy.add") || player.hasPermission("multicurrency.command.economy.set"))) {
             player.sendMessage(Utils.colorize(Messages.NO_PERMISSION.get().replace("{prefix}", Messages.PREFIX.get())));
         }
     }
 }
+
