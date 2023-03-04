@@ -29,10 +29,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn package --file pom.xml
-
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Upload Plugin jar
-      uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v3
       with:
-        name: Plugin-${{ env.snapshotVersion }}-${{ env.git_hash }}.jar
-        path: /MultiCurrency
+        path: target/
