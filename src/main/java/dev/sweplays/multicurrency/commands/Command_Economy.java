@@ -1,3 +1,5 @@
+package dev.sweplays.multicurrency.commands;
+
 import dev.sweplays.multicurrency.utilities.Messages;
 import dev.sweplays.multicurrency.utilities.Utils;
 import org.bukkit.Bukkit;
